@@ -1,0 +1,36 @@
+"Dada una matriz nxn, rotarla 90 grados a la derecha"
+|tam matriz recorrido v carga aux1 aux2 matriz2|
+tam:=(UIManager default request:'Ingrese el tamaño de la matriz').
+tam ifNil:[UIManager default message:'Programa terminado'. ^false].
+tam:= tam asNumber.
+(tam isNumber) ifFalse: [ UIManager default message: 'Error'.^false ].
+
+matriz:= Array new:tam.
+1 to: tam do:[:a| matriz at:a put: (Array new:tam)].
+matriz2:=Array new: tam.
+1 to: tam do:[:a| matriz2 at:a put: (Array new:tam)].
+
+recorrido:= tam*tam.
+1 to:tam do:[:a|
+	1 to:tam do:[:b|
+		carga:=(UIManager default request:'Ingrese el valor') asNumber.
+		(matriz at:a)at:b put:carga.
+		].
+	].
+aux1:=1.
+aux2:=tam.
+"Ahora a girarla"
+
+
+(tam>=2)ifTrue:
+	[ 
+		1 to:tam do:[:a|
+				1 to: tam do:[:b|
+					(matriz2 at:aux1) at:aux2 put:((matriz at:a)at:b).
+					aux1:=aux1+1.
+			].
+			aux1:=1.
+			aux2:=aux2-1.
+	 ].
+].
+^matriz2.
